@@ -7,16 +7,15 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class SakilaMovies {
+    private static Scanner scanner = new Scanner(System.in);
 
 
     public static String getUserInput() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter the last name of an actor you wish to see:");
         return scanner.nextLine();
     }
 
     public static String getUserInputFirstName() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter the first name of an actor you wish to see:");
         return scanner.nextLine();
     }
@@ -39,18 +38,24 @@ public class SakilaMovies {
              PreparedStatement preparedStatement =
                      connection.prepareStatement(
                              "SELECT first_name, last_name FROM actor WHERE last_name LIKE ? ORDER BY last_name")) {
-            preparedStatement.setString(1, "%" + getUserInput() + "%");
+            String lastName =  getUserInput();
+            preparedStatement.setString(1, "%" + lastName + "%");
             try (ResultSet rs = preparedStatement.executeQuery()) {
-                //
+
                 while (rs.next()) {
                     System.out.println("First Name: " + rs.getString("first_name") + " | Last name: " + rs.getString("last_name"));
                 }
 
             }
+
+            String firstName = getUserInputFirstName();
             PreparedStatement ps =
                     connection.prepareStatement(
-                            "SELECT first_name, last_name FROM actor WHERE last_name LIKE ? ORDER BY first_name");
-            ps.setString(1, "%" + getUserInputFirstName() + "%");
+                            "SELECT first_name, last_name FROM actor WHERE first_name LIKE ? AND last_name LIKE ? ORDER BY first_name");
+            ps.setString(2, "%" + lastName + "%");
+            ps.setString(1, "%" + firstName + "%");
+
+
             try (ResultSet rss = ps.executeQuery()) {
                 //
                 while (rss.next()) {
