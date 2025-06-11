@@ -68,24 +68,6 @@ public class SakilaMovies {
             System.out.println(e.getMessage());
         }
 
-    // ask user for the first name of that list
-//    System.out.println();
-//        try (Connection connection = datasource.getConnection();
-//             //Step 3: connect the query with a prepared statement with datasource connection
-//             PreparedStatement preparedStatement =
-//                     connection.prepareStatement(
-//                             "SELECT first_name, last_name FROM actor WHERE last_name LIKE ? ORDER BY last_name")) {
-//            preparedStatement.setString(1, "%" + getUserInputFirstName() + "%");
-//            try (ResultSet rs = preparedStatement.executeQuery()) {
-//                //
-//                while (rs.next()) {
-//                    System.out.println("First Name: " + rs.getString("first_name") + " | Last name: " + rs.getString("last_name"));
-//                }
-//            }
-//        }
-//        catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//        }
 
     }
 }
